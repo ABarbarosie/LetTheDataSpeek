@@ -1,6 +1,7 @@
 from Tkinter import Tk, Label
 from ttk import Frame, Style
 from webpage import WebPage
+import re
 
 class Application(Frame):
   
@@ -16,9 +17,8 @@ class Application(Frame):
         page = WebPage(["The","words","go","here"])
         print page.link + "\n"
         page.getContent()
-        print page.content
-               
-              
+        obj = re.findall(r'\[\{".*?\]',page.content)
+        print obj[1]      
 
 def main():
     root = Tk()
