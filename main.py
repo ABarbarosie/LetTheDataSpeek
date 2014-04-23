@@ -1,4 +1,4 @@
-from Tkinter import Tk, Label
+from Tkinter import Tk, Label, OptionMenu
 from ttk import Frame, Style
 from webpage import WebPage
 import re
@@ -16,7 +16,6 @@ def OnMouseDown(event,arg):
     offset = 100
     for index in range(1,len(data)):
         arg.create_line(index-1,offset-data[index-1],index,offset-data[index],fill="red")
-        print index
 
 class Application(Frame):
   
@@ -28,48 +27,101 @@ class Application(Frame):
         self.initUI()
         
     def initUI(self):
-        self.parent.title("Let the Data Speek")
+        self.parent.title("Let the Data Speak")
          
 
 def main():
     root = Tk()
-    root.geometry("1012x520+500+350")
+    root.geometry("525x550+500+350")
     app = Application(root)
 
-    frame = Tkinter.Frame(root, width=1000, height=100, borderwidth=2, highlightbackground="blue")
-    frame.grid(row=0, column=0, rowspan=2, columnspan=5)
+    label1 = Tkinter.Label(root, text = "1st Word", width = 20, height = 3)
+    label2 = Tkinter.Label(root, text = "2nd Word", width = 20, height = 3)
+    label3 = Tkinter.Label(root, text = "3rd Word", width = 20, height = 3)
+    label4 = Tkinter.Label(root, text = "4th Word", width = 20, height = 3)
+    label5 = Tkinter.Label(root, text = "5th Word", width = 20, height = 3)
+    label1.grid(row=1, column=0, sticky='W')
+    label2.grid(row=2, column=0, sticky='W')
+    label3.grid(row=3, column=0, sticky='W')
+    label4.grid(row=4, column=0, sticky='W')
+    label5.grid(row=5, column=0, sticky='W')
 
-    label1 = Tkinter.Label(frame, text = "1st Word", width = 10, height = 3)
-    label2 = Tkinter.Label(frame, text = "2nd Word", width = 10, height = 3)
-    label3 = Tkinter.Label(frame, text = "3rd Word", width = 10, height = 3)
-    label4 = Tkinter.Label(frame, text = "4th Word", width = 10, height = 3)
-    label5 = Tkinter.Label(frame, text = "5th Word", width = 10, height = 3)
-    label1.grid(row=0, column=0, sticky='W')
-    label2.grid(row=0, column=1, sticky='W')
-    label3.grid(row=0, column=2, sticky='W')
-    label4.grid(row=0, column=3, sticky='W')
-    label5.grid(row=0, column=4, sticky='W')
+    e1 = Tkinter.Entry(root,width=20)
+    e2 = Tkinter.Entry(root,width=20)
+    e3 = Tkinter.Entry(root,width=20)
+    e4 = Tkinter.Entry(root,width=20)
+    e5 = Tkinter.Entry(root,width=20)
+    e1.grid(row=1, column=1, sticky='W')
+    e2.grid(row=2, column=1, sticky='W')
+    e3.grid(row=3, column=1, sticky='W')
+    e4.grid(row=4, column=1, sticky='W')
+    e5.grid(row=5, column=1, sticky='W')
 
-    e1 = Tkinter.Entry(frame,width=20)
-    e2 = Tkinter.Entry(frame,width=20)
-    e3 = Tkinter.Entry(frame,width=20)
-    e4 = Tkinter.Entry(frame,width=20)
-    e5 = Tkinter.Entry(frame,width=20)
-    e1.grid(row=1, column=0, sticky='W')
-    e2.grid(row=1, column=1, sticky='W')
-    e3.grid(row=1, column=2, sticky='W')
-    e4.grid(row=1, column=3, sticky='W')
-    e5.grid(row=1, column=4, sticky='W')
+    options = ("Paino", "Instrument2", "Instrument3", "Instrument4", "Instrument5")
+    default1 = Tkinter.StringVar()
+    default1.set("Pick an instrument")
+
+    default2 = Tkinter.StringVar()
+    default2.set("Pick an instrument")
+
+    default3 = Tkinter.StringVar()
+    default3.set("Pick an instrument")
+
+    default4 = Tkinter.StringVar()
+    default4.set("Pick an instrument")
+
+    default5 = Tkinter.StringVar()
+    default5.set("Pick an instrument")
 
 
-    canvas = Tkinter.Canvas(root, width=1000, height=400, 
+    opt1 = Tkinter.OptionMenu(root, default1, *options)
+    opt1.config(width=15)
+    opt1.grid(row=1, column=2, sticky="ew")
+
+    opt2 = Tkinter.OptionMenu(root, default2, *options)
+    opt2.config(width=15)
+    opt2.grid(row=2, column=2, sticky="ew")
+
+    opt3 = Tkinter.OptionMenu(root, default3, *options)
+    opt3.config(width=15)
+    opt3.grid(row=3, column=2, sticky="ew")
+
+    opt4 = Tkinter.OptionMenu(root, default4, *options)
+    opt4.config(width=15)
+    opt4.grid(row=4, column=2, sticky="ew")
+
+    opt5 = Tkinter.OptionMenu(root, default5, *options)
+    opt5.config(width=15)
+    opt5.grid(row=5, column=2, sticky="ew")
+
+    empty1 = Tkinter.Label(root, text = "")
+    empty1.grid(row=15, column=0, columnspan=3)
+
+    empty2 = Tkinter.Label(root, text = "")
+    empty2.grid(row=9, column=0, columnspan=3)
+
+    empty3 = Tkinter.Label(root, text = "")
+    empty3.grid(row=10, column=0, columnspan=3)
+
+    empty4 = Tkinter.Label(root, text = "")
+    empty4.grid(row=0, column=0, columnspan=3)
+
+
+    link = Tkinter.Entry(root, width=40)
+    link.grid(row=16, column=0, columnspan=3, sticky='W')
+
+
+
+    canvas = Tkinter.Canvas(root, width=512, height=125, 
         borderwidth=5, highlightbackground="black", bg="white", relief="groove")
-    canvas.grid(row=2, column=0, columnspan=5, rowspan=2)
+    canvas.grid(row=11, column=0, columnspan=3, rowspan=4)
 
-    button_start = Tkinter.Button(root, text ="Sonify", width=15)
+
+
+    button_start = Tkinter.Button(root, text ="DO THE MAGIC", width=17, height=3, bg="red")
     button_start.bind("<Button-1>",
         lambda event, arg=canvas: OnMouseDown(event, arg))
-    button_start.grid(row=5, column=4)
+    button_start.grid(row=6, column=1, columnspan=2, sticky='W')
 
     root.mainloop()  
 
