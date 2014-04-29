@@ -7,11 +7,13 @@ import Tkinter
 
 def OnMouseDown(event, arg):
 
-    page = WebPage(["The", "words", "go", "here"])
+    page = WebPage(["boobs","money"])
     print page.link + "\n"
+
+    #page.login('letthedataspeak','Ilovemagic!')
     page.getContent()
 
-    f1 = open('data.csv', 'w+')
+    f1 = open('data.csv', 'w')
     f1.write(page.content)
 
     data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
