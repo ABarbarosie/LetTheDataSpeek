@@ -3,7 +3,6 @@ from ttk import Frame, Style
 from webpage import WebPage
 import re
 import Tkinter
-import csv
 
 
 def OnMouseDown(event, arg, login, password):
@@ -124,7 +123,7 @@ def main():
 
 
     loginEntry = Tkinter.Entry(root,width=20)
-    passwordEntry = Tkinter.Entry(root,width=20)
+    passwordEntry = Tkinter.Entry(root,width=20,show="*")
     loginEntry.grid(row=0,column=1, sticky = 'W')
     passwordEntry.grid(row=1,column=1, sticky='W')
 
@@ -147,6 +146,7 @@ def main():
         lambda event, arg=[e1,e2,e3,e4,e5], login=loginEntry.get(), password=passwordEntry.get()
                 : OnMouseDown(event, arg, login, password))
     button_start.grid(row=8, column=1, columnspan=2, sticky='W')
+
 
     root.mainloop()
 
