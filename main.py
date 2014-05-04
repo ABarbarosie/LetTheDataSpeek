@@ -15,7 +15,9 @@ def OnMouseDown(event,arg):
     data = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,20,30,100,70,30,40,55,56,58,60,39,38,35,36]
     offset = 100
     for index in range(1,len(data)):
-        arg.create_line(index-1,offset-data[index-1],index,offset-data[index],fill="red")
+        arg[0].create_line(index-1,offset-data[index-1],index,offset-data[index],fill="red")
+    arg[1].delete(0,END)
+    arg[1].insert(0,page.getLink())
 
 class Application(Frame):
   
@@ -109,18 +111,15 @@ def main():
 
     link = Tkinter.Entry(root, width=40)
     link.grid(row=16, column=0, columnspan=3, sticky='W')
-
-
+    link.insert(0,"Link to the data:")
 
     canvas = Tkinter.Canvas(root, width=512, height=125, 
         borderwidth=5, highlightbackground="black", bg="white", relief="groove")
     canvas.grid(row=11, column=0, columnspan=3, rowspan=4)
 
-
-
     button_start = Tkinter.Button(root, text ="DO THE MAGIC", width=17, height=3, bg="red")
     button_start.bind("<Button-1>",
-        lambda event, arg=canvas: OnMouseDown(event, arg))
+        lambda event, arg=[canvas,link]: OnMouseDown(event, arg))
     button_start.grid(row=6, column=1, columnspan=2, sticky='W')
 
     root.mainloop()  

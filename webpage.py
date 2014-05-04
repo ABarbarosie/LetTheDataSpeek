@@ -19,3 +19,6 @@ class WebPage:
 	def getContent(self):
 		intermediate = urllib2.urlopen(self.link)
 		self.content = intermediate.read()
+
+	def getLink(self):
+		return self.link
