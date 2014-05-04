@@ -17,17 +17,20 @@ def OnMouseDown(event, arg, login, password):
     print page.link + "\n"
 
     #page.login('letthedataspeak','Ilovemagic!')
-    page.getContent(login,password)
+    
+    #page.getContent(login,password)
 
-    f1 = open('data.csv', 'w')
-    f1.write(page.content)
+    f1 = open('data.csv', 'r')
+    #f1.write(page.content)
 
-    csv = page.content
+    #csv = page.content
 
     regex = '[0-9]+-.*?-.*?'
     for i in xrange(len(words)):
         regex += ',[0-9]+'
-    info = re.findall(regex,page.content)
+    info = re.findall(regex,
+        #page.content
+        f1)
     print info
 
 
