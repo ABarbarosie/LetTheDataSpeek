@@ -20,7 +20,7 @@ class WebPage:
         else:
             self.link = ""
 
-    def getContent(self):
+    def getContent(self,email,password):
         br = mechanize.Browser()
 
         # Act like we're a real browser
@@ -35,8 +35,8 @@ class WebPage:
         
         forms = mechanize.ParseResponse(response)
         form = forms[0]
-        form['Email'] = 'letthedataspeak'
-        form['Passwd'] = 'Ilovemagic!'
+        form['Email'] = email
+        form['Passwd'] = password
         
         response = br.open(form.click())
         time.sleep(5)

@@ -3,34 +3,35 @@ from ttk import Frame, Style
 from webpage import WebPage
 import re
 import Tkinter
+import csv
 
 
-def OnMouseDown(event, arg):
+def OnMouseDown(event, arg, login, password):
+    words = []
+    for i in xrange(len(arg)):
+        word = arg[i].get()
+        if (word != ""):
+            words += [word]
 
-    page = WebPage(["boobs","money"])
+    page = WebPage(words)
     print page.link + "\n"
 
     #page.login('letthedataspeak','Ilovemagic!')
-    page.getContent()
+    page.getContent(login,password)
 
     f1 = open('data.csv', 'w')
     f1.write(page.content)
 
-    data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
-            18, 19, 20, 20, 30, 100, 70, 30, 40, 55, 56, 58, 60, 39, 38, 35, 36]
-    offset = 100
-<<<<<<< HEAD
-    for index in range(1,len(data)):
-        arg[0].create_line(index-1,offset-data[index-1],index,offset-data[index],fill="red")
-    arg[1].delete(0,END)
-    arg[1].insert(0,page.getLink())
-=======
-    for index in range(1, len(data)):
-        arg.create_line(
-            index - 1, offset - data[index - 1], index, offset - data[index], fill="red")
-        print index
->>>>>>> 5a686eefa053c070ef70235f68ba5bd3a3c26610
+    csv = page.content
 
+    regex = '[0-9]+-.*?-.*?'
+    for i in xrange(len(words)):
+        regex += ',[0-9]+'
+    info = re.findall(regex,page.content)
+    print info
+
+
+    
 
 class Application(Frame):
 
@@ -46,7 +47,7 @@ class Application(Frame):
 
 def main():
     root = Tk()
-    root.geometry("525x550+500+350")
+    root.geometry("525x650+500+350")
     app = Application(root)
 
     label1 = Tkinter.Label(root, text = "1st Word", width = 20, height = 3)
@@ -54,22 +55,22 @@ def main():
     label3 = Tkinter.Label(root, text = "3rd Word", width = 20, height = 3)
     label4 = Tkinter.Label(root, text = "4th Word", width = 20, height = 3)
     label5 = Tkinter.Label(root, text = "5th Word", width = 20, height = 3)
-    label1.grid(row=1, column=0, sticky='W')
-    label2.grid(row=2, column=0, sticky='W')
-    label3.grid(row=3, column=0, sticky='W')
-    label4.grid(row=4, column=0, sticky='W')
-    label5.grid(row=5, column=0, sticky='W')
+    label1.grid(row=3, column=0, sticky='W')
+    label2.grid(row=4, column=0, sticky='W')
+    label3.grid(row=5, column=0, sticky='W')
+    label4.grid(row=6, column=0, sticky='W')
+    label5.grid(row=7, column=0, sticky='W')
 
     e1 = Tkinter.Entry(root,width=20)
     e2 = Tkinter.Entry(root,width=20)
     e3 = Tkinter.Entry(root,width=20)
     e4 = Tkinter.Entry(root,width=20)
     e5 = Tkinter.Entry(root,width=20)
-    e1.grid(row=1, column=1, sticky='W')
-    e2.grid(row=2, column=1, sticky='W')
-    e3.grid(row=3, column=1, sticky='W')
-    e4.grid(row=4, column=1, sticky='W')
-    e5.grid(row=5, column=1, sticky='W')
+    e1.grid(row=3, column=1, sticky='W')
+    e2.grid(row=4, column=1, sticky='W')
+    e3.grid(row=5, column=1, sticky='W')
+    e4.grid(row=6, column=1, sticky='W')
+    e5.grid(row=7, column=1, sticky='W')
 
     options = ("Paino", "Instrument2", "Instrument3", "Instrument4", "Instrument5")
     default1 = Tkinter.StringVar()
@@ -90,49 +91,61 @@ def main():
 
     opt1 = Tkinter.OptionMenu(root, default1, *options)
     opt1.config(width=15)
-    opt1.grid(row=1, column=2, sticky="ew")
+    opt1.grid(row=3, column=2, sticky="ew")
 
     opt2 = Tkinter.OptionMenu(root, default2, *options)
     opt2.config(width=15)
-    opt2.grid(row=2, column=2, sticky="ew")
+    opt2.grid(row=4, column=2, sticky="ew")
 
     opt3 = Tkinter.OptionMenu(root, default3, *options)
     opt3.config(width=15)
-    opt3.grid(row=3, column=2, sticky="ew")
+    opt3.grid(row=5, column=2, sticky="ew")
 
     opt4 = Tkinter.OptionMenu(root, default4, *options)
     opt4.config(width=15)
-    opt4.grid(row=4, column=2, sticky="ew")
+    opt4.grid(row=6, column=2, sticky="ew")
 
     opt5 = Tkinter.OptionMenu(root, default5, *options)
     opt5.config(width=15)
-    opt5.grid(row=5, column=2, sticky="ew")
+    opt5.grid(row=7, column=2, sticky="ew")
 
     empty1 = Tkinter.Label(root, text = "")
-    empty1.grid(row=15, column=0, columnspan=3)
+    empty1.grid(row=17, column=0, columnspan=3)
 
     empty2 = Tkinter.Label(root, text = "")
-    empty2.grid(row=9, column=0, columnspan=3)
+    empty2.grid(row=11, column=0, columnspan=3)
 
     empty3 = Tkinter.Label(root, text = "")
-    empty3.grid(row=10, column=0, columnspan=3)
+    empty3.grid(row=12, column=0, columnspan=3)
 
-    empty4 = Tkinter.Label(root, text = "")
-    empty4.grid(row=0, column=0, columnspan=3)
+    empty6 = Tkinter.Label(root, text = "")
+    empty6.grid(row=2, column=0, columnspan=3)
+
+
+    loginEntry = Tkinter.Entry(root,width=20)
+    passwordEntry = Tkinter.Entry(root,width=20)
+    loginEntry.grid(row=0,column=1, sticky = 'W')
+    passwordEntry.grid(row=1,column=1, sticky='W')
+
+    loginLabel = Tkinter.Label(root, text = "Login: ", width = 20, height = 3)
+    passwordLabel = Tkinter.Label(root, text = "Password: ", width = 20, height = 3)
+    loginLabel.grid(row=0,column=0, sticky='W')
+    passwordLabel.grid(row=1,column=0, sticky='W')
 
 
     link = Tkinter.Entry(root, width=40)
-    link.grid(row=16, column=0, columnspan=3, sticky='W')
+    link.grid(row=18, column=0, columnspan=3, sticky='W')
     link.insert(0,"Link to the data:")
 
     canvas = Tkinter.Canvas(root, width=512, height=125, 
         borderwidth=5, highlightbackground="black", bg="white", relief="groove")
-    canvas.grid(row=11, column=0, columnspan=3, rowspan=4)
+    canvas.grid(row=13, column=0, columnspan=3, rowspan=4)
 
     button_start = Tkinter.Button(root, text ="DO THE MAGIC", width=17, height=3, bg="red")
     button_start.bind("<Button-1>",
-        lambda event, arg=[canvas,link]: OnMouseDown(event, arg))
-    button_start.grid(row=6, column=1, columnspan=2, sticky='W')
+        lambda event, arg=[e1,e2,e3,e4,e5], login=loginEntry.get(), password=passwordEntry.get()
+                : OnMouseDown(event, arg, login, password))
+    button_start.grid(row=8, column=1, columnspan=2, sticky='W')
 
     root.mainloop()
 
