@@ -19,18 +19,6 @@ def OnMouseDown(event, arg):
     data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
             18, 19, 20, 20, 30, 100, 70, 30, 40, 55, 56, 58, 60, 39, 38, 35, 36]
     offset = 100
-<<<<<<< HEAD
-    for index in range(1,len(data)):
-        arg[0].create_line(index-1,offset-data[index-1],index,offset-data[index],fill="red")
-    arg[1].delete(0,END)
-    arg[1].insert(0,page.getLink())
-=======
-    for index in range(1, len(data)):
-        arg.create_line(
-            index - 1, offset - data[index - 1], index, offset - data[index], fill="red")
-        print index
->>>>>>> 5a686eefa053c070ef70235f68ba5bd3a3c26610
-
 
 class Application(Frame):
 
