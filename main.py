@@ -31,8 +31,6 @@ def OnMouseDown(event, arg, login, password):
     print info
 
 
-    
-
 class Application(Frame):
 
     def __init__(self, parent):
