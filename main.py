@@ -4,33 +4,45 @@ from webpage import WebPage
 import re
 import Tkinter
 
-def OnMouseDown(event,arg):
-    
-    page = WebPage(["The","words","go","here"])
-    print page.link + "\n"
-    page.getContent()
-    obj = re.findall(r'\[\{".*?\]',page.content)  
-    print obj
 
-    data = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,20,30,100,70,30,40,55,56,58,60,39,38,35,36]
+def OnMouseDown(event, arg):
+
+    page = WebPage(["boobs","money"])
+    print page.link + "\n"
+
+    #page.login('letthedataspeak','Ilovemagic!')
+    page.getContent()
+
+    f1 = open('data.csv', 'w')
+    f1.write(page.content)
+
+    data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+            18, 19, 20, 20, 30, 100, 70, 30, 40, 55, 56, 58, 60, 39, 38, 35, 36]
     offset = 100
+<<<<<<< HEAD
     for index in range(1,len(data)):
         arg[0].create_line(index-1,offset-data[index-1],index,offset-data[index],fill="red")
     arg[1].delete(0,END)
     arg[1].insert(0,page.getLink())
+=======
+    for index in range(1, len(data)):
+        arg.create_line(
+            index - 1, offset - data[index - 1], index, offset - data[index], fill="red")
+        print index
+>>>>>>> 5a686eefa053c070ef70235f68ba5bd3a3c26610
+
 
 class Application(Frame):
-  
+
     def __init__(self, parent):
-        Frame.__init__(self, parent)   
-         
+        Frame.__init__(self, parent)
+
         self.parent = parent
-        
+
         self.initUI()
-        
+
     def initUI(self):
         self.parent.title("Let the Data Speak")
-         
 
 def main():
     root = Tk()
@@ -122,7 +134,7 @@ def main():
         lambda event, arg=[canvas,link]: OnMouseDown(event, arg))
     button_start.grid(row=6, column=1, columnspan=2, sticky='W')
 
-    root.mainloop()  
+    root.mainloop()
 
 if __name__ == '__main__':
-    main()  
+    main()
