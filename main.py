@@ -5,7 +5,14 @@ import re
 import Tkinter
 
 
-def OnMouseDown(event, arg, login, password,instr):
+def OnMouseDown(event, arg, login, password, instr, flag, link):
+    if flag.get() == 1:
+        # get data locally
+        print ""
+    else:
+        # get data from website
+        print ""
+
     words = ["a","b"]
 
     for i in xrange(len(arg)):
@@ -14,6 +21,7 @@ def OnMouseDown(event, arg, login, password,instr):
             words += [word]
 
     page = WebPage(words)
+    link.set(page.link)
     print page.link + "\n"
 
     #page.login('letthedataspeak','Ilovemagic!')
@@ -153,10 +161,14 @@ def main():
     loginLabel.grid(row=0,column=0, sticky='W')
     passwordLabel.grid(row=1,column=0, sticky='W')
 
-
-    link = Tkinter.Entry(root, width=40)
+    linkContent = Tkinter.StringVar()
+    linkContent.set("Link to the data:")
+    link = Tkinter.Entry(root, width=40, textvariable=linkContent)
     link.grid(row=18, column=0, columnspan=3, sticky='W')
-    link.insert(0,"Link to the data:")
+
+    cb = Tkinter.IntVar()
+    checkButton = Tkinter.Checkbutton(root,text="Local Data", variable = cb)
+    checkButton.grid(row=0,column=2)
 
     canvas = Tkinter.Canvas(root, width=512, height=125, 
         borderwidth=5, highlightbackground="black", bg="white", relief="groove")
@@ -165,8 +177,8 @@ def main():
     button_start = Tkinter.Button(root, text ="DO THE MAGIC", width=17, height=3, bg="red")
     button_start.bind("<Button-1>",
         lambda event, arg=[e1,e2,e3,e4,e5], login=loginEntry.get(), password=passwordEntry.get(),
-                instr = [default1,default2,default3,default4,default5]
-                : OnMouseDown(event, arg, login, password,instr))
+                instr = [default1,default2,default3,default4,default5], flag=cb, lnk=linkContent
+                : OnMouseDown(event, arg, login, password, instr, flag, lnk))
     button_start.grid(row=8, column=1, columnspan=2, sticky='W')
 
 
