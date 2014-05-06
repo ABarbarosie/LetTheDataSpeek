@@ -1,0 +1,18 @@
+import org.jfugue.*; 
+
+public class MyMusicApp {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		Player player = new Player();
+		Pattern pattern = new Pattern("C E C D D B");
+		player.play("I[Piano] C5q D5q+I[Metallic] C5q D5q");
+	
+		System.exit(0);
+		// If using Java 1.4 or lower
+	}
+
+}

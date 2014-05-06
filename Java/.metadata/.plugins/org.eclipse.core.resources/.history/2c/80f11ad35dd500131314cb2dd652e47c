@@ -1,0 +1,21 @@
+import org.jfugue.*; 
+
+public class MyMusicApp {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		Player player = new Player();
+		Pattern pattern1 = new Pattern("C E C D D B");
+		Pattern pattern2 = new Pattern("B D D C E C");
+		Pattern pattern3 = new Pattern("A E C C E B");
+		Pattern song;
+		
+		player.play(pattern);
+		System.exit(0);
+		// If using Java 1.4 or lower
+	}
+
+}

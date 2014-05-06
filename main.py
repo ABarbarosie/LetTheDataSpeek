@@ -5,8 +5,9 @@ import re
 import Tkinter
 
 
-def OnMouseDown(event, arg, login, password):
-    words = []
+def OnMouseDown(event, arg, login, password,instr):
+    words = ["a","b"]
+
     for i in xrange(len(arg)):
         word = arg[i].get()
         if (word != ""):
@@ -24,14 +25,34 @@ def OnMouseDown(event, arg, login, password):
 
     #csv = page.content
 
+    con = ""
+    for line in f1:
+        con += line
+
     regex = '[0-9]+-.*?-.*?'
     for i in xrange(len(words)):
         regex += ',[0-9]+'
-    info = re.findall(regex,
-        #page.content
-        f1)
-    print info
+    
+    info = re.findall(regex,con) #page.content instead of con
+    
+    data = []
+    for i in xrange(len(info)):
+        temp = re.findall(',[0-9]+,[0-9]+',info[i])
+        num = re.findall(r'\d+',temp[0])
+        data += num
 
+    output = open('data.txt','w')
+    for i in xrange(len(data)):
+        output.write(data[i])
+        if (i!=0 and i % len(words)):
+            output.write('\n')
+        else:
+            output.write(' ')
+
+    params = []
+    for i in xrange(len(words)):
+        params += instr[i].get()[0]
+    print params
 
 class Application(Frame):
 
@@ -143,12 +164,14 @@ def main():
 
     button_start = Tkinter.Button(root, text ="DO THE MAGIC", width=17, height=3, bg="red")
     button_start.bind("<Button-1>",
-        lambda event, arg=[e1,e2,e3,e4,e5], login=loginEntry.get(), password=passwordEntry.get()
-                : OnMouseDown(event, arg, login, password))
+        lambda event, arg=[e1,e2,e3,e4,e5], login=loginEntry.get(), password=passwordEntry.get(),
+                instr = [default1,default2,default3,default4,default5]
+                : OnMouseDown(event, arg, login, password,instr))
     button_start.grid(row=8, column=1, columnspan=2, sticky='W')
 
 
     root.mainloop()
+
 
 if __name__ == '__main__':
     main()
