@@ -1,0 +1,15 @@
+import org.jfugue.*; 
+
+public class MyMusicApp {
+
+	public static void main(String[] args) {
+		Player player = new Player();
+		Pattern pattern1 = new Pattern("I[XYLOPHONE] V0 A B C");
+		Pattern song = new Pattern();
+		song.add(pattern1);
+		player.play(song);
+		System.exit(0);
+		// If using Java 1.4 or lower
+	}
+
+}

@@ -1,0 +1,21 @@
+import org.jfugue.*; 
+
+public class MyMusicApp {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		Player player = new Player();
+		Pattern pattern1 = new Pattern("T126 I[Flute] V0 A B C");
+		//Pattern pattern2 = new Pattern("T126 I[Piano] V1 D E F");
+		Pattern song = new Pattern();
+		song.add(pattern1);
+		//song.add(pattern2);
+		player.play(song);
+		System.exit(0);
+		// If using Java 1.4 or lower
+	}
+
+}

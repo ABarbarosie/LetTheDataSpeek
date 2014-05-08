@@ -3,19 +3,25 @@ from ttk import Frame, Style
 from webpage import WebPage
 import re
 import Tkinter
-import csv
 
 
+def OnMouseDown(event, arg, login, password, instr, flag, link):
+    if flag.get() == 1:
+        # get data locally
+        print ""
+    else:
+        # get data from website
+        print ""
 
+    words = ["a","b"]
 
-def OnMouseDown(event, arg, login, password):
-    words = []
     for i in xrange(len(arg)):
         word = arg[i].get()
         if (word != ""):
             words += [word]
 
     page = WebPage(words)
+    link.set(page.link)
     print page.link + "\n"
 
     #page.login('letthedataspeak','Ilovemagic!')
@@ -27,17 +33,35 @@ def OnMouseDown(event, arg, login, password):
 
     #csv = page.content
 
-###############################
+    con = ""
+    for line in f1:
+        con += line
+
     regex = '[0-9]+-.*?-.*?'
     for i in xrange(len(words)):
         regex += ',[0-9]+'
-    info = re.findall(regex,file1)
-        #page.content
-        
-    print info
+    
+    info = re.findall(regex,con) #page.content instead of con
+    
+    data = []
+    for i in xrange(len(info)):
+        temp = re.findall(',[0-9]+,[0-9]+',info[i])
+        num = re.findall(r'\d+',temp[0])
+        data += num
 
-    f1.close()
-###############################
+    output = open('data.txt','w')
+    for i in xrange(len(data)):
+        output.write(data[i])
+        if (i!=0 and i % len(words)):
+            output.write('\n')
+        else:
+            output.write(' ')
+
+    params = []
+    for i in xrange(len(words)):
+        params += instr[i].get()[0]
+    print params
+
 
 class Application(Frame):
 
@@ -129,7 +153,7 @@ def main():
 
 
     loginEntry = Tkinter.Entry(root,width=20)
-    passwordEntry = Tkinter.Entry(root,width=20)
+    passwordEntry = Tkinter.Entry(root,width=20,show="*")
     loginEntry.grid(row=0,column=1, sticky = 'W')
     passwordEntry.grid(row=1,column=1, sticky='W')
 
@@ -138,10 +162,14 @@ def main():
     loginLabel.grid(row=0,column=0, sticky='W')
     passwordLabel.grid(row=1,column=0, sticky='W')
 
-
-    link = Tkinter.Entry(root, width=40)
+    linkContent = Tkinter.StringVar()
+    linkContent.set("Link to the data:")
+    link = Tkinter.Entry(root, width=40, textvariable=linkContent)
     link.grid(row=18, column=0, columnspan=3, sticky='W')
-    link.insert(0,"Link to the data:")
+
+    cb = Tkinter.IntVar()
+    checkButton = Tkinter.Checkbutton(root,text="Local Data", variable = cb)
+    checkButton.grid(row=0,column=2)
 
     canvas = Tkinter.Canvas(root, width=512, height=125, 
         borderwidth=5, highlightbackground="black", bg="white", relief="groove")
@@ -149,11 +177,14 @@ def main():
 
     button_start = Tkinter.Button(root, text ="DO THE MAGIC", width=17, height=3, bg="red")
     button_start.bind("<Button-1>",
-        lambda event, arg=[e1,e2,e3,e4,e5], login=loginEntry.get(), password=passwordEntry.get()
-                : OnMouseDown(event, arg, login, password))
+        lambda event, arg=[e1,e2,e3,e4,e5], login=loginEntry.get(), password=passwordEntry.get(),
+                instr = [default1,default2,default3,default4,default5], flag=cb, lnk=linkContent
+                : OnMouseDown(event, arg, login, password, instr, flag, lnk))
     button_start.grid(row=8, column=1, columnspan=2, sticky='W')
 
+
     root.mainloop()
+
 
 if __name__ == '__main__':
     main()
