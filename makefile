@@ -4,8 +4,8 @@ ARGS = ""
 
 all:
 	cd Java/LetTheDataSpeak/ ; \
-	ant build -Darguments="$(ARGS)" -verbose ; \
-	ant MyMusicApp ;   
+	ant build -verbose ; \
+	ant MyMusicApp -Darguments="$(ARGS)";   
 
 
 
