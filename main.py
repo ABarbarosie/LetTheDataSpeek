@@ -3,7 +3,8 @@ from ttk import Frame, Style
 from webpage import WebPage
 import re
 import Tkinter
-
+import sys
+from subprocess import call
 
 def OnMouseDown(event, arg, login, password, instr, flag, link):
     if flag.get() == 1:
@@ -13,7 +14,7 @@ def OnMouseDown(event, arg, login, password, instr, flag, link):
         # get data from website
         print ""
 
-    words = ["a","b"]
+    words = ["word1","word2"]
 
     for i in xrange(len(arg)):
         word = arg[i].get()
@@ -61,6 +62,16 @@ def OnMouseDown(event, arg, login, password, instr, flag, link):
     for i in xrange(len(words)):
         params += instr[i].get()[0]
     print params
+
+    ARGS = "ARGS="
+    for i in xrange(len(words)):
+        ARGS += words[i]
+        ARGS += " "
+    # ARGS += "a b c d e"
+    ARGS += ""
+    print ARGS
+    sys.stdout.flush()
+    call(["make", ARGS])
 
 
 class Application(Frame):

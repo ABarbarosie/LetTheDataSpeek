@@ -1,8 +1,10 @@
+ARGS = ""
+
 .PHONY: all
 
 all:
 	cd Java/LetTheDataSpeak/ ; \
-	ant build ; \
+	ant build -Darguments="$(ARGS)" -verbose ; \
 	ant MyMusicApp ;   
 
 

@@ -10,11 +10,14 @@ public class MyMusicApp {
 		
 		final int DATAPOINTS = 163; // number datapoints per word
 		
+		System.out.println(args.length);
+		
 		// retrieve the words from args.
 		String[] words = new String[args.length];
 		for (int i = 0; i < args.length; i++)
 		{
 			words[i] = args[i];
+			System.out.println(args[i]);
 		}
 		
 		
