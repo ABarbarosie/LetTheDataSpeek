@@ -4,4 +4,4 @@
 *.csv
 *.txt
 *.pyc
-./Java/.metadata
+./Java/.metadata/*
