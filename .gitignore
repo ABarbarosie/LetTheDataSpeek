@@ -5,3 +5,6 @@
 *.txt
 *.pyc
 ./Java/.metadata/*
+./Java/LetTheDataSpeak/bin/*
+./Java/LetTheDataSpeak/.classpath
+./Java/LetTheDataSpeak/.project
