@@ -64,14 +64,14 @@ public class MyMusicApp {
 //	        System.out.println(everything);
 	        
 	        // printing data array
-	        for (int i = 0; i < args.length; i++)
+/*	        for (int i = 0; i < args.length; i++)
 	        {
 	        	for (int j = 0; j < count; j++)
 	        	{
 	        		System.out.printf("%d ",data[i][j]);
 	        	}
 	        		System.out.println();
-	        }
+	        }*/
 	    } 
 	    finally 
 	    {

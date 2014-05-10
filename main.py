@@ -34,7 +34,7 @@ def OnMouseDown(event, arg, login, password, instr, flag, link):
     #csv = page.content
 
     con = ""
-    for line in f1:
+    for line in file1:
         con += line
 
     regex = '[0-9]+-.*?-.*?'
