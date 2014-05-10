@@ -1,0 +1,34 @@
+//import org.jfugue.*; 
+import java.io.*;
+
+public class MyMusicApp {
+
+	public static void main(String[] args) throws IOException {
+//		Player player = new Player();
+//		Pattern pattern1 = new Pattern("I[CHIFF] V0 A B C");
+//		Pattern song = new Pattern();
+//		song.add(pattern1);
+//		player.play(song);
+//		System.exit(0);
+//		// If using Java 1.4 or lower
+		
+		
+		BufferedReader br = new BufferedReader(new FileReader("data.txt"));
+	    try {
+	        StringBuilder sb = new StringBuilder();
+	        String line = br.readLine();
+
+	        while (line != null) {
+	            sb.append(line);
+	            sb.append("\n");
+	            line = br.readLine();
+	        }
+	        String everything = sb.toString();
+	        System.out.println(everything);
+	    } finally {
+	        br.close();
+	    }
+		
+	}
+
+}

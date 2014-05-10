@@ -1,0 +1,73 @@
+//import org.jfugue.*; 
+import java.io.*;
+import java.util.Scanner;
+
+public class MyMusicApp {
+
+	public static void main(String[] args) throws IOException {
+		
+		String[] words = new String[args.length];
+		
+		for (int i = 0; i < args.length; i++)
+		{
+			words[i] = args[i];
+		}
+		
+		
+		/**
+		 * Extract data from file
+		 */
+		
+		if (args.length == 1)
+		{
+			int[] data;
+			data = new int[163];
+		}
+		else
+		{
+			int[][] data;
+			data = new int[args.length][163];
+		}
+		
+		BufferedReader br = new BufferedReader(new FileReader("data.txt"));
+	    try 
+	    {
+	        StringBuilder sb = new StringBuilder();
+	        String line = br.readLine();
+
+	        while (line != null) 
+	        {
+	            sb.append(line);
+	            Scanner in = new Scanner(line);
+	            if (args.length == 1)
+	            {
+	            	
+	            }
+	            else
+	            {
+	            	
+	            }
+	            in.close();
+	            sb.append("\n");
+	            line = br.readLine();
+	        }
+	        String everything = sb.toString();
+	        System.out.println(everything);
+	    } 
+	    finally 
+	    {
+	        br.close();
+	    }
+	
+//		Player player = new Player();
+//		Pattern pattern1 = new Pattern("I[CHIFF] V0 A B C");
+//		Pattern song = new Pattern();
+//		song.add(pattern1);
+//		player.play(song);
+//		System.exit(0);
+//		// If using Java 1.4 or lower
+	    
+	    
+	}
+
+}
