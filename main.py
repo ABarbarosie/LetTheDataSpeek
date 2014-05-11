@@ -7,56 +7,89 @@ import sys
 from subprocess import call
 
 def OnMouseDown(event, arg, login, password, instr, flag, link):
+    words = []
+    for i in xrange(len(arg)):
+        if (arg[i].get() != ""):
+            words += [arg[i].get()]
+    
+    print words
+
     if flag.get() == 1:
+        # only to set the link
+        page = WebPage(words)
+        link.set(page.link)
+
         # get data locally
-        print ""
+        globalFile = open('data.csv', 'r')
+        globalC = globalFile.read()
+
+        globalCon = ""
+        for line in globalC:
+            globalCon += line
+
+        regex = '[0-9]+-.*?-.*?'
+        for i in xrange(len(words)):
+            regex += ',[0-9]+'
+
+        globalInfo = re.findall(regex,globalCon)
+
+        globalData = []
+        for i in xrange(len(globalInfo)):
+            temp = re.findall(',[0-9]+,[0-9]+',globalInfo[i])
+            num = re.findall(r'\d+',temp[0])
+            globalData += num
+
+        allwords = []
+        for i in xrange(len(words)):
+            string = words[i] + ".csv"
+            fle = open(string, 'r')
+            file1 = fle.read()
+            con = ""
+            for line in file1:
+                con += line
+            info = re.findall(r'[0-9]+-.*?-.*?,[0-9]+',con)
+            data = []
+            for j in xrange(len(info)):
+                temp = re.findall(',[0-9]+',info[j])
+                num = re.findall(r'\d+',temp[0])
+                data += num
+            allwords.append(data)
+            print len(allwords[0])
+
+        # output
+        output = open('data.txt','w')
+        for i in xrange(len(allwords[0])):
+            for j in xrange(len(allwords)):
+                output.write(allwords[j][i] + " " + globalData[i*len(words)+j] + " ")
+            output.write("\n")
+
     else:
         # get data from website
-        print ""
+        page = WebPage(words)
+        link.set(page.link)
 
-    words = ["word1","word2"]
+        page.getContent(login,password)
+        # get global data
+        globalFile = open('data.csv', 'r')
+        globalC = globalFile.read()
 
-    for i in xrange(len(arg)):
-        word = arg[i].get()
-        if (word != ""):
-            words += [word]
+        globalCon = ""
+        for line in globalC:
+            globalCon += line
 
-    page = WebPage(words)
-    link.set(page.link)
-    print page.link + "\n"
+        regex = '[0-9]+-.*?-.*?'
+        for i in xrange(len(words)):
+            regex += ',[0-9]+'
 
-    #page.login('letthedataspeak','Ilovemagic!')
-    #page.getContent(login,password)
+        globalInfo = re.findall(regex,globalCon)
+        globalData = []
+        for i in xrange(len(globalInfo)):
+            temp = re.findall(',[0-9]+,[0-9]+',globalInfo[i])
+            num = re.findall(r'\d+',temp[0])
+            globalData += num
 
-    f1 = open('data.csv', 'r')
-    file1 = f1.read();
-    #f1.write(page.content)
 
-    #csv = page.content
 
-    con = ""
-    for line in file1:
-        con += line
-
-    regex = '[0-9]+-.*?-.*?'
-    for i in xrange(len(words)):
-        regex += ',[0-9]+'
-    
-    info = re.findall(regex,con) #page.content instead of con
-    
-    data = []
-    for i in xrange(len(info)):
-        temp = re.findall(',[0-9]+,[0-9]+',info[i])
-        num = re.findall(r'\d+',temp[0])
-        data += num
-
-    output = open('data.txt','w')
-    for i in xrange(len(data)):
-        output.write(data[i])
-        if (i!=0 and i % len(words)):
-            output.write('\n')
-        else:
-            output.write(' ')
 
     params = []
     for i in xrange(len(words)):
