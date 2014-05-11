@@ -124,13 +124,14 @@ public class MyMusicApp {
 	    	}
 	    }
 	    
-	    Pattern output = new Pattern();
+	    Pattern output = new Pattern("T180");
 	    for(int i=0; i<WORDS; i++) {
 	    	Sonifier sf = new Sonifier(instruments[i], data[i*2], data[i*2+1], sortedPos[i], count, i);
 	    	output.add(sf.getPattern());
 	    }
 	    
-		Player player = new Player();
+	    Player player = new Player();
+	    player.saveMidi(output, new File("sonification.midi"));
 		player.play(output);
 		
 	    //PlayPatterns test = new PlayPatterns();
