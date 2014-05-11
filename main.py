@@ -30,12 +30,15 @@ def OnMouseDown(event, arg, login, password, instr, flag, link):
         regex = '[0-9]+-.*?-.*?'
         for i in xrange(len(words)):
             regex += ',[0-9]+'
-
         globalInfo = re.findall(regex,globalCon)
+
+        regex = ""
+        for i in xrange(len(words))
+            regex += ',[0-9]+'
 
         globalData = []
         for i in xrange(len(globalInfo)):
-            temp = re.findall(',[0-9]+,[0-9]+',globalInfo[i])
+            temp = re.findall(regex,globalInfo[i])
             num = re.findall(r'\d+',temp[0])
             globalData += num
 
@@ -80,15 +83,16 @@ def OnMouseDown(event, arg, login, password, instr, flag, link):
         regex = '[0-9]+-.*?-.*?'
         for i in xrange(len(words)):
             regex += ',[0-9]+'
-
         globalInfo = re.findall(regex,globalCon)
+
+        regex = ""
+        for i in xrange(len(words))
+            regex += ',[0-9]+'
         globalData = []
         for i in xrange(len(globalInfo)):
-            temp = re.findall(',[0-9]+,[0-9]+',globalInfo[i])
+            temp = re.findall(regex,globalInfo[i])
             num = re.findall(r'\d+',temp[0])
             globalData += num
-
-
 
 
     params = []
@@ -100,7 +104,10 @@ def OnMouseDown(event, arg, login, password, instr, flag, link):
     for i in xrange(len(words)):
         ARGS += words[i]
         ARGS += " "
-    # ARGS += "a b c d e"
+
+    for i in xrange(len(words)):
+        ARGS += instr[i].get()[0]
+
     ARGS += ""
     print ARGS
     sys.stdout.flush()
@@ -146,7 +153,7 @@ def main():
     e4.grid(row=6, column=1, sticky='W')
     e5.grid(row=7, column=1, sticky='W')
 
-    options = ("Paino", "Instrument2", "Instrument3", "Instrument4", "Instrument5")
+    options = ("PIANO", "GUITAR", "TRUMPET", "VIOLIN", "XYLOPHONE")
     default1 = Tkinter.StringVar()
     default1.set("Pick an instrument")
 
