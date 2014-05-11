@@ -8,9 +8,21 @@ public class MyMusicApp {
 
 	public static void main(String[] args) throws IOException {
 		
-		final int DATAPOINTS = 163; // number datapoints per word
+		final int DATAPOINTS = 550; // number datapoints per word
+		int WORDS = 1;
+		if (args.length == 1)
+		{
+			System.out.println("No words provided");
+			System.exit(1);
+		}
+		else if (args.length != 1)
+		{
+			WORDS = args.length + 1;
+		}
 		
-		System.out.println(args.length);
+		
+		
+		System.out.println(WORDS);
 		
 		// retrieve the words from args.
 		String[] words = new String[args.length];
@@ -25,7 +37,7 @@ public class MyMusicApp {
 		 * Extract data from file
 		 */
 		int[][] data;
-		data = new int[args.length][DATAPOINTS];
+		data = new int[WORDS][DATAPOINTS];
 		
 		BufferedReader br = new BufferedReader(new FileReader("data.txt"));
 	    try 
@@ -47,7 +59,7 @@ public class MyMusicApp {
 		            }
 		            else
 		            {
-		            	for (int index = 0; index < args.length; index++)
+		            	for (int index = 0; index < WORDS; index++)
 		            	{
 		            		val = in.nextInt();
 			            	data[index][count] = val;
@@ -67,7 +79,7 @@ public class MyMusicApp {
 //	        System.out.println(everything);
 	        
 	        // printing data array
-	        for (int i = 0; i < args.length; i++)
+	        for (int i = 0; i < WORDS; i++)
 	        {
 	        	for (int j = 0; j < count; j++)
 	        	{
