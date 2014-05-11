@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
 
 /*
  * The class generates a list of hashmaps that contain
@@ -10,7 +12,11 @@ import java.util.HashMap;
  */
 
 public class PlayPatterns {
-	public ArrayList<HashMap<DataPattern, NotePair[]>> patterns = new ArrayList<HashMap<DataPattern, NotePair[]>>();
+	public List<HashMap<DataPattern, NotePair[]>> patterns = new ArrayList<HashMap<DataPattern, NotePair[]>>();
+	
+	public NotePair[] getPattern(int notes, DataPattern contour) {
+		return patterns.get(notes).get(contour);
+	}
 	
 	public PlayPatterns() {
 		//1 note length
@@ -27,7 +33,6 @@ public class PlayPatterns {
 		m.put(new DataPattern(-1, 0), add);
 		m.put(new DataPattern(-1, 1), add);
 		m.put(new DataPattern(-1, -1), add);
-		
 		patterns.add(m);
 		//2 note length
 		m = new HashMap<DataPattern, NotePair[]>();

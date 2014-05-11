@@ -1,5 +1,5 @@
-import java.util.ArrayList;
-import java.util.HashMap;
+//import java.util.ArrayList;
+//import java.util.HashMap;
 
 import org.jfugue.*; 
 
@@ -10,7 +10,7 @@ public class Sonifier {
 	int[] sortedPos;
 	int channel;
 	String instrument;
-	public ArrayList<HashMap<DataPattern, NotePair[]>> patterns;
+	PlayPatterns playPat;
 	
 	public Sonifier(String instr, int[] al, int[] tg, int[] srtd, int cnt, int cn) {
 		DATAPOINTS = cnt;
@@ -19,8 +19,7 @@ public class Sonifier {
 		alone = al;
 		instrument = instr;
 		channel = cn;
-		PlayPatterns wrk = new PlayPatterns();
-		patterns = wrk.patterns;
+		playPat = new PlayPatterns();
 	}
 	
 	//get the corresponding pattern to 3 notes
@@ -46,6 +45,7 @@ public class Sonifier {
 		return (int)((double)35/100 * (double)datapoint);
 	}
 	
+	//convert a musical pattern with a root note and volume to actual notes
 	public String rawToNotes(NotePair[] playPattern, int root, int attack) {
 		String res = "";
 		
@@ -56,18 +56,22 @@ public class Sonifier {
 		return res;
 	}
 	
+	//get the entire pattern for an instrument
 	public Pattern getPattern() {
 		String res = "";
 		res += "I[" + instrument + "] ";
 		res += "V" + Integer.toString(channel);
 		
+		//for each triplet of datapoints
 		for(int i=0; i+2<DATAPOINTS; i+=3){
+			//get their contour
 			DataPattern p = getDataPattern(alone[i], alone[i+1], alone[i+2]);
-			NotePair[] playPattern = patterns.get(sortedPos[i]).get(p);
+			//get the musical pattern
+			NotePair[] playPattern = playPat.getPattern(sortedPos[i], p);
+			//generate root note and volume by means
 			int root = getNoteNum((alone[i] + alone[i+1] + alone[i+2])/3);
 			int attack = (together[i]+together[i+1]+together[i+2])/3 + 27;
-			
-			System.out.printf("%d %d\n", p.first, p.second);
+			//convert to notes and add 
 			res += rawToNotes(playPattern, root, attack);
 		}
 		

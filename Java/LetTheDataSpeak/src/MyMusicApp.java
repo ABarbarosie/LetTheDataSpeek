@@ -129,10 +129,14 @@ public class MyMusicApp {
 	    	Sonifier sf = new Sonifier(instruments[i], data[i*2], data[i*2+1], sortedPos[i], count, i);
 	    	output.add(sf.getPattern());
 	    }
-
+	    
 		Player player = new Player();
 		player.play(output);
-		//Pattern p1 = new Pattern("I[TROMBONE] V0 C1qa120 G5ha100 A5qa90 C4qa90 C5ha120");
+		
+	    //PlayPatterns test = new PlayPatterns();
+	    //System.out.println(test.getPattern(0, new DataPattern(0,1)));
+	    
+	    //Pattern p1 = new Pattern("I[TROMBONE] V0 C1qa120 G5ha100 A5qa90 C4qa90 C5ha120");
 		//player.play(p1);
 		
 	    
