@@ -1,4 +1,244 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+/*
+ * The class generates a list of hashmaps that contain
+ * the musical pattern corresponding to a certain data pattern.
+ * 
+ * Each musical pattern is exactly one measure long. 
+ * 
+ */
 
 public class PlayPatterns {
-
+	public List<HashMap<DataPattern, NotePair[]>> patterns = new ArrayList<HashMap<DataPattern, NotePair[]>>();
+	
+	public NotePair[] getPattern(int notes, DataPattern contour) {
+		return patterns.get(notes).get(contour);
+	}
+	
+	public PlayPatterns() {
+		//1 note length
+		HashMap<DataPattern, NotePair[]> m = new HashMap<DataPattern, NotePair[]>();
+		NotePair[] add = new NotePair[1];
+		add[0] = new NotePair(0,'w');
+		
+		m.put(new DataPattern(0, 0), add);
+		m.put(new DataPattern(0, -1), add);
+		m.put(new DataPattern(0, 1), add);
+		m.put(new DataPattern(1, 0), add);
+		m.put(new DataPattern(1, -1), add);
+		m.put(new DataPattern(1, 1), add);
+		m.put(new DataPattern(-1, 0), add);
+		m.put(new DataPattern(-1, 1), add);
+		m.put(new DataPattern(-1, -1), add);
+		patterns.add(m);
+		//2 note length
+		m = new HashMap<DataPattern, NotePair[]>();
+		add = new NotePair[2];
+		
+		add[0] = new NotePair(0,'h');
+		add[1] = new NotePair(0,'h');
+		m.put(new DataPattern(0, 0), add);
+		m.put(new DataPattern(-1, 1), add);
+		m.put(new DataPattern(1, -1), add);
+		
+		add[1] = new NotePair(4,'h');
+		m.put(new DataPattern(0, 1), add);
+		m.put(new DataPattern(1, 0), add);
+		
+		add[1] = new NotePair(-3,'h');
+		m.put(new DataPattern(0, -1), add);
+		m.put(new DataPattern(-1, 0), add);
+		
+		add[1] = new NotePair(7, 'h');
+		m.put(new DataPattern(1, 1), add);
+		
+		add[1] = new NotePair(-7, 'h');
+		m.put(new DataPattern(-1, -1), add);
+		
+		patterns.add(m);
+		
+		//3 notes length
+		m = new HashMap<DataPattern, NotePair[]>();
+		add = new NotePair[3];
+		
+		add[0] = new NotePair(0, 'h');
+		add[1] = new NotePair(7, 'q');
+		add[2] = new NotePair(0, 'q');
+		m.put(new DataPattern(0, 0), add);
+		
+		add[0] = new NotePair(0, 'h');
+		add[1] = new NotePair(0, 'q');
+		add[2] = new NotePair(-1, 'q');
+		m.put(new DataPattern(0, -1), add);
+		
+		add[0] = new NotePair(0, 'h');
+		add[1] = new NotePair(0, 'q');
+		add[2] = new NotePair(4, 'q');
+		m.put(new DataPattern(0, 1), add);
+		
+		add[0] = new NotePair(0, 'h');
+		add[1] = new NotePair(4, 'q');
+		add[2] = new NotePair(4, 'q');
+		m.put(new DataPattern(1, 0), add);
+		
+		add[0] = new NotePair(4, 'q');
+		add[1] = new NotePair(7, 'q');
+		add[2] = new NotePair(0, 'h');
+		m.put(new DataPattern(1, -1), add);
+		
+		add[0] = new NotePair(0, 'q');
+		add[1] = new NotePair(4, 'q');
+		add[2] = new NotePair(7, 'h');
+		m.put(new DataPattern(1, 1), add);
+		
+		add[0] = new NotePair(0, 'h');
+		add[1] = new NotePair(-3, 'q');
+		add[2] = new NotePair(-3, 'q');
+		m.put(new DataPattern(-1, 0), add);
+		
+		add[0] = new NotePair(0, 'q');
+		add[1] = new NotePair(-3, 'h');
+		add[2] = new NotePair(0, 'q');
+		m.put(new DataPattern(-1, 1), add);
+		
+		add[0] = new NotePair(4, 'q');
+		add[1] = new NotePair(0, 'q');
+		add[2] = new NotePair(-7, 'h');
+		m.put(new DataPattern(-1, -1), add);
+		
+		patterns.add(m);
+		//4 notes length
+		m = new HashMap<DataPattern, NotePair[]>();
+		add = new NotePair[4];
+		
+		add[0] = new NotePair(0, 'q');
+		add[1] = new NotePair(7, 'q');
+		add[2] = new NotePair(4, 'q');
+		add[3] = new NotePair(0, 'q');
+		m.put(new DataPattern(0, 0), add);
+		
+		add[0] = new NotePair(0, 'q');
+		add[1] = new NotePair(4, 'q');
+		add[2] = new NotePair(3, 'q');
+		add[3] = new NotePair(-1, 'q');
+		m.put(new DataPattern(0, -1), add);
+		
+		add[0] = new NotePair(0, 'q');
+		add[1] = new NotePair(7, 'q');
+		add[2] = new NotePair(0, 'q');
+		add[3] = new NotePair(4, 'q');
+		m.put(new DataPattern(0, 1), add);
+		
+		add[0] = new NotePair(0, 'q');
+		add[1] = new NotePair(7, 'q');
+		add[2] = new NotePair(4, 'q');
+		add[3] = new NotePair(4, 'q');
+		m.put(new DataPattern(1, 0), add);
+		
+		add[0] = new NotePair(4, 'q');
+		add[1] = new NotePair(7, 'q');
+		add[2] = new NotePair(4, 'q');
+		add[3] = new NotePair(0, 'q');
+		m.put(new DataPattern(1, -1), add);
+		
+		add[0] = new NotePair(0, 'q');
+		add[1] = new NotePair(7, 'q');
+		add[2] = new NotePair(4, 'q');
+		add[3] = new NotePair(7, 'q');
+		m.put(new DataPattern(1, 1), add);
+		
+		add[0] = new NotePair(0, 'q');
+		add[1] = new NotePair(-3, 'q');
+		add[2] = new NotePair(1, 'q');
+		add[3] = new NotePair(-3, 'q');
+		m.put(new DataPattern(-1, 0), add);
+		
+		add[0] = new NotePair(0, 'q');
+		add[1] = new NotePair(-3, 'q');
+		add[2] = new NotePair(4, 'q');
+		add[3] = new NotePair(0, 'q');
+		m.put(new DataPattern(-1, 1), add);
+		
+		add[0] = new NotePair(4, 'q');
+		add[1] = new NotePair(-1, 'q');
+		add[2] = new NotePair(0, 'q');
+		add[3] = new NotePair(-7, 'q');
+		m.put(new DataPattern(-1, -1), add);
+		
+		patterns.add(m);
+		
+		//5 notes length
+		m = new HashMap<DataPattern, NotePair[]>();
+		add = new NotePair[5];
+		
+		add[0] = new NotePair(0, 'q');
+		add[1] = new NotePair(4, 'i');
+		add[2] = new NotePair(7, 'i');
+		add[3] = new NotePair(4, 'q');
+		add[4] = new NotePair(0, 'q');
+		m.put(new DataPattern(0, 0), add);
+		
+		add[0] = new NotePair(0, 'q');
+		add[1] = new NotePair(4, 'q');
+		add[2] = new NotePair(3, 'i');
+		add[3] = new NotePair(4, 'i');
+		add[4] = new NotePair(-1, 'q');
+		m.put(new DataPattern(0, -1), add);
+		
+		add[0] = new NotePair(0, 'q');
+		add[1] = new NotePair(9, 'q');
+		add[2] = new NotePair(0, 'i');
+		add[3] = new NotePair(7, 'i');
+		add[4] = new NotePair(4, 'q');
+		m.put(new DataPattern(0, 1), add);
+		
+		add[0] = new NotePair(0, 'q');
+		add[1] = new NotePair(9, 'q');
+		add[2] = new NotePair(4, 'i');
+		add[3] = new NotePair(7, 'i');
+		add[4] = new NotePair(4, 'q');
+		m.put(new DataPattern(1, 0), add);
+		
+		add[0] = new NotePair(4, 'q');
+		add[1] = new NotePair(7, 'q');
+		add[2] = new NotePair(9, 'i');
+		add[3] = new NotePair(4, 'i');
+		add[4] = new NotePair(0, 'q');
+		m.put(new DataPattern(1, -1), add);
+		
+		add[0] = new NotePair(0, 'q');
+		add[1] = new NotePair(9, 'q');
+		add[2] = new NotePair(4, 'i');
+		add[3] = new NotePair(4, 'i');
+		add[4] = new NotePair(7, 'q');
+		m.put(new DataPattern(1, 1), add);
+		
+		add[0] = new NotePair(0, 'q');
+		add[1] = new NotePair(-1, 'i');
+		add[2] = new NotePair(4, 'i');
+		add[3] = new NotePair(-3, 'q');
+		add[4] = new NotePair(-1, 'q');
+		m.put(new DataPattern(-1, 0), add);
+		
+		add[0] = new NotePair(0, 'q');
+		add[1] = new NotePair(-3, 'q');
+		add[2] = new NotePair(0, 'i');
+		add[3] = new NotePair(4, 'i');
+		add[4] = new NotePair(0, 'q');
+		m.put(new DataPattern(-1, 1), add);
+		
+		add[0] = new NotePair(4, 'q');
+		add[1] = new NotePair(-3, 'i');
+		add[2] = new NotePair(0, 'i');
+		add[3] = new NotePair(-3, 'q');
+		add[4] = new NotePair(-7, 'q');
+		m.put(new DataPattern(-1, -1), add);
+		
+		patterns.add(m);
+		
+		
+	}
 }

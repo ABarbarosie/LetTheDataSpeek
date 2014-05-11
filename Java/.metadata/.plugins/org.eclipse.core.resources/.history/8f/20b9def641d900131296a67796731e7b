@@ -1,0 +1,20 @@
+import org.jfugue.*; 
+
+public class Sonifier {
+	int DATAPOINTS;
+	int[] alone;
+	int[] together;
+	int[] sortedPos;
+	String instrument;
+	
+	public Sonifier(String instr, int[] al, int[] tg, int[] srtd, int cnt) {
+		DATAPOINTS = cnt;
+		sortedPos = srtd;
+		together = tg;
+		alone = al;
+		instrument = instr;
+	}
+	
+	
+	
+}

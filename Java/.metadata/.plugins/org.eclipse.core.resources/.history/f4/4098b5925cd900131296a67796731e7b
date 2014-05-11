@@ -1,0 +1,34 @@
+import org.jfugue.*; 
+
+public class Sonifier {
+	int DATAPOINTS;
+	int[] alone;
+	int[] together;
+	int[] sortedPos;
+	int channel;
+	String instrument;
+	
+	public Sonifier(String instr, int[] al, int[] tg, int[] srtd, int cnt, int cn) {
+		DATAPOINTS = cnt;
+		sortedPos = srtd;
+		together = tg;
+		alone = al;
+		instrument = instr;
+		channel = cn;
+	}
+	
+	public DataPattern getDataPattern(int a, int b, int c) {
+		return new DataPattern(Integer.signum(b-a), Integer.signum(c-a));
+	}
+	
+	
+	
+	public Pattern getPattern() {
+		String pat = "";
+		pat += "I[" + instrument + "] ";
+		pat += "V" + Integer.toString(channel) + ' ';
+		
+		return new Pattern();
+	}
+	
+}

@@ -1,7 +1,7 @@
 
 public class NotePair {
-	int val;
-	char dur;
+	public int val;
+	public char dur;
 	public NotePair(int v, char d) {
 		val = v;
 		dur = d;
