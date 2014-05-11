@@ -106,11 +106,10 @@ public class MyMusicApp {
 	    //get raw data
 	    for(int i=0; i<WORDS; i++) {
 	    	for(int j=0; j<count; j++) {
-	    		sortedPos[i][j] = data[i*2+1][j];
+	    		sortedPos[i][j] = data[i*2+1][j] + 10;	//dirty, filthy hack
 	    	}
 	    }
 	    //transform
-	    //todo: fix this, this is wrong.
 	    for(int j=0; j<count; j++){
 	    	int pos = WORDS-1;
 	    	while(pos >= 0) {
@@ -133,14 +132,9 @@ public class MyMusicApp {
 
 		Player player = new Player();
 		player.play(output);
+		//Pattern p1 = new Pattern("I[TROMBONE] V0 C1qa120 G5ha100 A5qa90 C4qa90 C5ha120");
+		//player.play(p1);
 		
-//		Pattern pattern1 = new Pattern("I[CHIFF] V0 A B C");
-//		Pattern song = new Pattern();
-//		song.add(pattern1);
-//		player.play(song);
-//		System.exit(0);
-//		// If using Java 1.4 or lower
-	    
 	    
 	}
 
