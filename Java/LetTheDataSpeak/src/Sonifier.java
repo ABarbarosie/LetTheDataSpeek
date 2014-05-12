@@ -29,12 +29,15 @@ public class Sonifier {
 	
 	//get the not corresponding to a certain noteNumber
 	public String getNote(int noteNum) {
+		
+		if(noteNum<0) return "C1";
+		
 		char name; int octave;
 		int n = noteNum % 7;
 		if(n<5) name = (char)((int)'C' + n);
 		else name = (char)((int)'A' + n - 5);
 		
-		octave = noteNum/7 + 1;
+		octave = noteNum/7 + 2;
 		
 		String result = name + Integer.toString(octave);
 		return result;
@@ -70,7 +73,8 @@ public class Sonifier {
 			NotePair[] playPattern = playPat.getPattern(sortedPos[i], p);
 			//generate root note and volume by means
 			int root = getNoteNum((alone[i] + alone[i+1] + alone[i+2])/3);
-			int attack = (together[i]+together[i+1]+together[i+2])/3 + 27;
+			int attack = (int)((double)0.84*(together[i]+together[i+1]+together[i+2])/3 + 42);
+			
 			//convert to notes and add 
 			res += rawToNotes(playPattern, root, attack);
 		}
