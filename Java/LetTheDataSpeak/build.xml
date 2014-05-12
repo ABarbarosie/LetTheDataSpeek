@@ -35,11 +35,6 @@
             <classpath refid="LetTheDataSpeak.classpath"/>
         </javac>
     </target>
-	<target name="MyMusicApp"> 
-		<java classname="MyMusicApp" failonerror="true" fork="yes"> <arg line="${arguments}"/> 
-			<classpath refid="LetTheDataSpeak.classpath"/>
-		</java>
-	</target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
     <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
         <copy todir="${ant.library.dir}">
