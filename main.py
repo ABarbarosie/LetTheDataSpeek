@@ -4,7 +4,7 @@ from webpage import WebPage
 import re
 import Tkinter
 import sys
-from subprocess import call
+import subprocess
 
 def OnMouseDown(event, arg, login, password, instr, flag, link, canvas):
     words = []
@@ -39,7 +39,7 @@ def OnMouseDown(event, arg, login, password, instr, flag, link, canvas):
             temp = re.findall(regex,globalInfo[i])
             num = re.findall(r'\d+',temp[0])
             globalData += num
-
+        # read individual
         allwords = []
         for i in xrange(len(words)):
             string = words[i] + ".csv"
@@ -55,7 +55,6 @@ def OnMouseDown(event, arg, login, password, instr, flag, link, canvas):
                 num = re.findall(r'\d+',temp[0])
                 data += num
             allwords.append(data)
-            print len(allwords[0])
 
         # output
         output = open('data.txt','w')
@@ -92,29 +91,57 @@ def OnMouseDown(event, arg, login, password, instr, flag, link, canvas):
             num = re.findall(r'\d+',temp[0])
             globalData += num
 
+        for i in xrange(len(words)):
+            page = WebPage([words[i]])
+            link.set(page.link)
+            page.getContent(login,password)
+
+        # rename 
+        for i in xrange(len(words)):
+            bashCommand = "rename "
+            bashCommand += "data(" + str(i+1) + ").csv " + words[i] + ".csv"
+            process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+            output = process.communicate()[0]
+
+        # read individual
+        allwords = []
+        for i in xrange(len(words)):
+            string = words[i] + ".csv"
+            fle = open(string, 'r')
+            file1 = fle.read()
+            con = ""
+            for line in file1:
+                con += line
+            info = re.findall(r'[0-9]+-.*?-.*?,[0-9]+',con)
+            data = []
+            for j in xrange(len(info)):
+                temp = re.findall(',[0-9]+',info[j])
+                num = re.findall(r'\d+',temp[0])
+                data += num
+            allwords.append(data)
+
+        # output
+        output = open('data.txt','w')
+        for i in xrange(len(allwords[0])):
+            for j in xrange(len(allwords)):
+                output.write(allwords[j][i] + " " + globalData[i*len(words)+j] + " ")
+            output.write("\n")
+
+
+
 
     canvas.create_line(0,114,520,114, fill="black", width = 4)
-    color = ["yellow", "green", "coral", "blue", "red"]
+    color = ["coral", "yellow", "green", "blue", "red"]
     # visualisation
     for i in xrange(len(words)):
         for j in xrange(len(allwords[0])):
             if (j<520):
                 canvas.create_line(j,110-int(allwords[i][j]),j+1,110-int(allwords[i][j+1]),
-                    fill=color[i], width=2)
-
-
-    params = []
-    for i in xrange(len(words)):
-        params += instr[i].get()[0]
-    print params
+                    fill=color[i], width=1)
 
     ARGS = "ARGS="
     for i in xrange(len(words)):
-        ARGS += words[i]
-        ARGS += " "
-
-    for i in xrange(len(words)):
-        ARGS += instr[i].get()[0]
+        ARGS += instr[i].get()
 
     ARGS += ""
     print ARGS
