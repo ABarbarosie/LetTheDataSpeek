@@ -106,13 +106,13 @@ public class MyMusicApp {
 	    //get raw data
 	    for(int i=0; i<WORDS; i++) {
 	    	for(int j=0; j<count; j++) {
-	    		sortedPos[i][j] = data[i*2+1][j] + 10;	//dirty, filthy hack
+	    		sortedPos[i][j] = data[i*2+1][j] + 20;	//dirty, filthy hack
 	    	}
 	    }
 	    //transform
 	    for(int j=0; j<count; j++){
-	    	int pos = WORDS-1;
-	    	while(pos >= 0) {
+	    	int pos = 4;
+	    	while(pos > 4-WORDS) {
 	    		int m=-1, mp=-1;
 	    		for(int i=0; i<WORDS; i++)
 	    			if(sortedPos[i][j] > m) {
@@ -124,13 +124,15 @@ public class MyMusicApp {
 	    	}
 	    }
 	    
-	    Pattern output = new Pattern();
+	    
+	    Pattern output = new Pattern("T180");
 	    for(int i=0; i<WORDS; i++) {
 	    	Sonifier sf = new Sonifier(instruments[i], data[i*2], data[i*2+1], sortedPos[i], count, i);
 	    	output.add(sf.getPattern());
 	    }
 	    
-		Player player = new Player();
+	    Player player = new Player();
+	    player.saveMidi(output, new File("sonification.midi"));
 		player.play(output);
 		
 	    //PlayPatterns test = new PlayPatterns();
