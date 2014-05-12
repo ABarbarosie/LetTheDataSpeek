@@ -6,7 +6,7 @@ import Tkinter
 import sys
 from subprocess import call
 
-def OnMouseDown(event, arg, login, password, instr, flag, link):
+def OnMouseDown(event, arg, login, password, instr, flag, link, canvas):
     words = []
     for i in xrange(len(arg)):
         if (arg[i].get() != ""):
@@ -33,7 +33,7 @@ def OnMouseDown(event, arg, login, password, instr, flag, link):
         globalInfo = re.findall(regex,globalCon)
 
         regex = ""
-        for i in xrange(len(words))
+        for i in xrange(len(words)):
             regex += ',[0-9]+'
 
         globalData = []
@@ -86,7 +86,7 @@ def OnMouseDown(event, arg, login, password, instr, flag, link):
         globalInfo = re.findall(regex,globalCon)
 
         regex = ""
-        for i in xrange(len(words))
+        for i in xrange(len(words)):
             regex += ',[0-9]+'
         globalData = []
         for i in xrange(len(globalInfo)):
@@ -112,6 +112,13 @@ def OnMouseDown(event, arg, login, password, instr, flag, link):
     print ARGS
     sys.stdout.flush()
     call(["make", ARGS])
+
+    canvas.create_line(0,110,511,110, fill="black", width = 5)
+    # visualisation
+    for i in xrange(len(words)):
+        for j in xrange(len(allwords[0])):
+            if (j<512):
+                canvas.create_line(j,)
 
 
 class Application(Frame):
@@ -229,8 +236,9 @@ def main():
     button_start = Tkinter.Button(root, text ="DO THE MAGIC", width=17, height=3, bg="red")
     button_start.bind("<Button-1>",
         lambda event, arg=[e1,e2,e3,e4,e5], login=loginEntry.get(), password=passwordEntry.get(),
-                instr = [default1,default2,default3,default4,default5], flag=cb, lnk=linkContent
-                : OnMouseDown(event, arg, login, password, instr, flag, lnk))
+                instr = [default1,default2,default3,default4,default5], flag=cb, lnk=linkContent,
+                cnv = canvas
+                : OnMouseDown(event, arg, login, password, instr, flag, lnk, cnv))
     button_start.grid(row=8, column=1, columnspan=2, sticky='W')
 
 
