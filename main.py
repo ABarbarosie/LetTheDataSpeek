@@ -11,8 +11,6 @@ def OnMouseDown(event, arg, login, password, instr, flag, link, canvas):
     for i in xrange(len(arg)):
         if (arg[i].get() != ""):
             words += [arg[i].get()]
-    
-    print words
 
     if flag.get() == 1:
         # only to set the link
@@ -95,6 +93,16 @@ def OnMouseDown(event, arg, login, password, instr, flag, link, canvas):
             globalData += num
 
 
+    canvas.create_line(0,114,520,114, fill="black", width = 4)
+    color = ["yellow", "green", "coral", "blue", "red"]
+    # visualisation
+    for i in xrange(len(words)):
+        for j in xrange(len(allwords[0])):
+            if (j<520):
+                canvas.create_line(j,110-int(allwords[i][j]),j+1,110-int(allwords[i][j+1]),
+                    fill=color[i], width=2)
+
+
     params = []
     for i in xrange(len(words)):
         params += instr[i].get()[0]
@@ -112,13 +120,6 @@ def OnMouseDown(event, arg, login, password, instr, flag, link, canvas):
     print ARGS
     sys.stdout.flush()
     call(["make", ARGS])
-
-    canvas.create_line(0,110,511,110, fill="black", width = 5)
-    # visualisation
-    for i in xrange(len(words)):
-        for j in xrange(len(allwords[0])):
-            if (j<512):
-                canvas.create_line(j,)
 
 
 class Application(Frame):
