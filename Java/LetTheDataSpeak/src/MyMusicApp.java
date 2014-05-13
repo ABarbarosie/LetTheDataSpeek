@@ -10,6 +10,9 @@ public class MyMusicApp {
 		
 		final int DATAPOINTS = 550; // number data points per word
 		int WORDS = 1;
+		for (int i = 0; i < args.length; i++)
+			System.out.println(args[i]);
+		System.out.println(args.length);
 		if (args.length == 1)
 		{
 			System.out.println("No words provided");
@@ -49,6 +52,7 @@ public class MyMusicApp {
 	        count = 0;
 	        while (line != null) 
 	        {
+		        System.out.println(line);
 	            sb.append(line);
 	            Scanner in = new Scanner(line);
 	            try{

@@ -5,6 +5,7 @@ import re
 import Tkinter
 import sys
 import subprocess
+import os
 
 def OnMouseDown(event, arg, login, password, instr, flag, link, canvas):
     words = []
@@ -57,7 +58,7 @@ def OnMouseDown(event, arg, login, password, instr, flag, link, canvas):
             allwords.append(data)
 
         # output
-        output = open('data.txt','w')
+        output = open('Java/LetTheDataSpeak/data.txt','w')
         for i in xrange(len(allwords[0])):
             for j in xrange(len(allwords)):
                 output.write(allwords[j][i] + " " + globalData[i*len(words)+j] + " ")
@@ -121,7 +122,7 @@ def OnMouseDown(event, arg, login, password, instr, flag, link, canvas):
             allwords.append(data)
 
         # output
-        output = open('data.txt','w')
+        output = open('Java/LetTheDataSpeak/data.txt','w')
         for i in xrange(len(allwords[0])):
             for j in xrange(len(allwords)):
                 output.write(allwords[j][i] + " " + globalData[i*len(words)+j] + " ")
@@ -139,14 +140,21 @@ def OnMouseDown(event, arg, login, password, instr, flag, link, canvas):
                 canvas.create_line(j,110-int(allwords[i][j]),j+1,110-int(allwords[i][j+1]),
                     fill=color[i], width=1)
 
-    ARGS = "ARGS="
+    ARGS = "ARGS='"
     for i in xrange(len(words)):
-        ARGS += instr[i].get()
+        ARGS += instr[i].get() + ' '
 
-    ARGS += ""
+    ARGS += "'"
     print ARGS
     sys.stdout.flush()
-    call(["make", ARGS])
+    command = "make " + ARGS
+    # subprocess.call(["make", ARGS])
+    ret1 = os.fork()
+    if ret1==0:
+        os.system(command)
+    else:
+        os.wait(ret1)
+
 
 
 class Application(Frame):
