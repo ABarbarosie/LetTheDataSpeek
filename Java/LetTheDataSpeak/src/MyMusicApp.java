@@ -8,7 +8,7 @@ public class MyMusicApp {
 
 	public static void main(String[] args) throws IOException {
 		
-		final int DATAPOINTS = 550; // number data points per word
+		final int DATAPOINTS = 535; // number data points per word
 		int WORDS = 1;
 		if (args.length == 1)
 		{
@@ -32,7 +32,6 @@ public class MyMusicApp {
 			System.out.println(args[i]);
 		}
 		
-		
 		/**
 		 * Extract data from file
 		 */
@@ -51,6 +50,13 @@ public class MyMusicApp {
 	        {
 	            sb.append(line);
 	            Scanner in = new Scanner(line);
+	            
+	            if (line.split("\\s+").length != WORDS * 2){
+	            	System.out.println(line);
+	            	line = br.readLine();
+	            	continue;
+	            }
+
 	            try{
 		            int val;
 		            if (args.length == 1)

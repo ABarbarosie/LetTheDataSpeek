@@ -57,7 +57,7 @@ def OnMouseDown(event, arg, login, password, instr, flag, link, canvas):
             allwords.append(data)
 
         # output
-        output = open('data.txt','w')
+        output = open('Java/LetTheDataSpeak/data.txt','w')
         for i in xrange(len(allwords[0])):
             for j in xrange(len(allwords)):
                 output.write(allwords[j][i] + " " + globalData[i*len(words)+j] + " ")
@@ -121,16 +121,13 @@ def OnMouseDown(event, arg, login, password, instr, flag, link, canvas):
             allwords.append(data)
 
         # output
-        output = open('data.txt','w')
+        output = open('Java/LetTheDataSpeak/data.txt','w')
         for i in xrange(len(allwords[0])):
             for j in xrange(len(allwords)):
                 output.write(allwords[j][i] + " " + globalData[i*len(words)+j] + " ")
             output.write("\n")
 
-
-
-
-    canvas.create_line(0,114,520,114, fill="black", width = 4)
+    canvas.create_line(0,114,520,114, fill="black", width = 3)
     color = ["coral", "yellow", "green", "blue", "red"]
     # visualisation
     for i in xrange(len(words)):
@@ -139,14 +136,17 @@ def OnMouseDown(event, arg, login, password, instr, flag, link, canvas):
                 canvas.create_line(j,110-int(allwords[i][j]),j+1,110-int(allwords[i][j+1]),
                     fill=color[i], width=1)
 
+    import time
+    time.sleep(5)
+
     ARGS = "ARGS="
     for i in xrange(len(words)):
-        ARGS += instr[i].get()
+        ARGS += instr[i].get() + " "
 
     ARGS += ""
     print ARGS
     sys.stdout.flush()
-    call(["make", ARGS])
+    subprocess.call(["make", ARGS])
 
 
 class Application(Frame):
@@ -204,7 +204,6 @@ def main():
     default5 = Tkinter.StringVar()
     default5.set("Pick an instrument")
 
-
     opt1 = Tkinter.OptionMenu(root, default1, *options)
     opt1.config(width=15)
     opt1.grid(row=3, column=2, sticky="ew")
@@ -251,7 +250,7 @@ def main():
     linkContent = Tkinter.StringVar()
     linkContent.set("Link to the data:")
     link = Tkinter.Entry(root, width=40, textvariable=linkContent)
-    link.grid(row=18, column=0, columnspan=3, sticky='W')
+    link.grid(row=18, column=0, columnspan=2, sticky='W')
 
     cb = Tkinter.IntVar()
     checkButton = Tkinter.Checkbutton(root,text="Local Data", variable = cb)
@@ -268,7 +267,6 @@ def main():
                 cnv = canvas
                 : OnMouseDown(event, arg, login, password, instr, flag, lnk, cnv))
     button_start.grid(row=8, column=1, columnspan=2, sticky='W')
-
 
     root.mainloop()
 
