@@ -52,7 +52,7 @@ public class MyMusicApp {
 	        count = 0;
 	        while (line != null) 
 	        {
-		        System.out.println(line);
+		        // System.out.println(line);
 	            sb.append(line);
 	            Scanner in = new Scanner(line);
 	            try{
@@ -137,7 +137,8 @@ public class MyMusicApp {
 	    
 	    Player player = new Player();
 	    player.saveMidi(output, new File("sonification.midi"));
-		player.play(output);
+	    System.out.println("Midi saved");
+		// player.play(output);
 		
 	    //PlayPatterns test = new PlayPatterns();
 	    //System.out.println(test.getPattern(0, new DataPattern(0,1)));

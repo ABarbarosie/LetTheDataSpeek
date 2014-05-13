@@ -140,20 +140,23 @@ def OnMouseDown(event, arg, login, password, instr, flag, link, canvas):
                 canvas.create_line(j,110-int(allwords[i][j]),j+1,110-int(allwords[i][j+1]),
                     fill=color[i], width=1)
 
-    ARGS = "ARGS='"
+    ARGS = "ARGS="
     for i in xrange(len(words)):
         ARGS += instr[i].get() + ' '
 
-    ARGS += "'"
+    ARGS += ""
     print ARGS
     sys.stdout.flush()
     command = "make " + ARGS
-    # subprocess.call(["make", ARGS])
     ret1 = os.fork()
     if ret1==0:
-        os.system(command)
+        # os.system(command)
+        subprocess.call(["make", ARGS])
     else:
         os.wait(ret1)
+    #     import time
+    #     time.sleep(1)
+    #     sys.exit(0)
 
 
 
