@@ -5,6 +5,7 @@ import re
 import Tkinter
 import sys
 import subprocess
+import os
 
 def OnMouseDown(event, arg, login, password, instr, flag, link, canvas):
     words = []
@@ -141,13 +142,12 @@ def OnMouseDown(event, arg, login, password, instr, flag, link, canvas):
 
     ARGS = "ARGS="
     for i in xrange(len(words)):
-        ARGS += instr[i].get() + " "
+        ARGS += instr[i].get() + ' '
 
     ARGS += ""
     print ARGS
     sys.stdout.flush()
     subprocess.call(["make", ARGS])
-
 
 class Application(Frame):
 
