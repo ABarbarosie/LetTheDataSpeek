@@ -8,7 +8,7 @@ public class MyMusicApp {
 
 	public static void main(String[] args) throws IOException {
 		
-		final int DATAPOINTS = 550; // number data points per word
+		final int DATAPOINTS = 1000; // number data points per word
 		int WORDS = 1;
 		for (int i = 0; i < args.length; i++)
 			System.out.println(args[i]);
@@ -52,6 +52,15 @@ public class MyMusicApp {
 	        count = 0;
 	        while (line != null) 
 	        {
+	        	String[] result = line.split(" ");
+	        	// System.out.println(result.length);
+		        if(result.length < WORDS*2)
+		        {
+		        	System.out.printf("Bad line. ");
+		        	System.out.println(result.length);
+		        	line = br.readLine();
+		        	continue;
+		        }
 		        // System.out.println(line);
 	            sb.append(line);
 	            Scanner in = new Scanner(line);
@@ -79,20 +88,6 @@ public class MyMusicApp {
 	            
 	            line = br.readLine();
 	        }
-//	        String everything = sb.toString();
-//	        System.out.println(everything);
-	        
-	        // printing data array
-	        /*
-	        for (int i = 0; i < WORDS*2; i++)
-	        {
-	        	for (int j = 0; j < count; j++)
-	        	{
-	        		System.out.printf("%d ",data[i][j]);
-	        	}
-	        		System.out.println();
-	        }
-	        */
 	    } 
 	    finally 
 	    {
@@ -138,7 +133,7 @@ public class MyMusicApp {
 	    Player player = new Player();
 	    player.saveMidi(output, new File("sonification.midi"));
 	    System.out.println("Midi saved");
-		// player.play(output);
+		player.play(output);
 		
 	    //PlayPatterns test = new PlayPatterns();
 	    //System.out.println(test.getPattern(0, new DataPattern(0,1)));

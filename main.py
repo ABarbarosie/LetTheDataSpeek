@@ -148,15 +148,7 @@ def OnMouseDown(event, arg, login, password, instr, flag, link, canvas):
     print ARGS
     sys.stdout.flush()
     command = "make " + ARGS
-    ret1 = os.fork()
-    if ret1==0:
-        # os.system(command)
-        subprocess.call(["make", ARGS])
-    else:
-        os.wait(ret1)
-    #     import time
-    #     time.sleep(1)
-    #     sys.exit(0)
+    subprocess.call(["make", ARGS])
 
 
 
